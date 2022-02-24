@@ -180,3 +180,15 @@
 }
 
 /*====================================== CARDS*/
+
+
+/*FOOTER ================================*/
+
+.footer__copyright {
+  color: var(--color__gray);
+  font-size: 18px;
+  line-height: 22px;
+  margin: 0;
+}
+
+/*==================================== FOOTER*/

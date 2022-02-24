@@ -19,6 +19,18 @@
   color: var(--color__white);
 }
 
+@media (min-width: 425px) and (max-width: 992px) {
+  .page {
+    padding: 45px 20px 60px;
+  }
+}
+
+/* Landscape phones and smaller */
+@media (max-width: 424px) {
+  .page {
+    padding: 28px 0 36px;
+  }
+}
 
 /*HEADER ========================*/
 
@@ -106,17 +118,53 @@
 }
 
 .profile__add {
-  background: url(../../images/icon__add.svg) no-repeat;
-  background-size: cover;
+  background: url(../../images/icon__add2.svg) no-repeat center;
+  border: 2px solid var(--color__white);
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
   width: 150px;
   height: 50px;
-  border: none;
   cursor: pointer;
   transition: .2s ease;
 }
 
 .profile__add:hover {
   opacity: .6;
+}
+
+@media (max-width: 720px) {
+  .profile {
+    flex-direction: column;
+    gap: 36px;
+  }
+  .profile__add {
+    width: 100%;
+  }
+}
+
+@media (max-width: 550px) {
+  .profile__wrap {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 26px;
+  }
+  .profile__info {
+    gap: 14px 10px;
+  }
+  .profile__name {
+    font-size: 27px;
+    line-height: 33px;
+  }
+  .profile__about {
+    font-size: 14px;
+    grid-column: span 2 / auto;
+  }
+  .profile__edit {
+    width: 18px;
+    height: 18px;
+  }
 }
 
 /*===================================== PROFILE*/

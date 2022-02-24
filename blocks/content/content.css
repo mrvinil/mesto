@@ -1,0 +1,24 @@
+.content {
+  padding: 40px 0 66px;
+}
+
+/* Portrait tablets and medium desktops */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .content {
+    /*padding: 40px 0 66px;*/
+  }
+}
+
+/* Portrait tablets and small desktops */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .content {
+    /*padding: 40px 0 66px;*/
+  }
+}
+
+/* Landscape phones and smaller */
+@media (max-width: 424px) {
+  .content {
+    padding: 42px 0 48px;
+  }
+}

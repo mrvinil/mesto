@@ -120,3 +120,63 @@
 }
 
 /*===================================== PROFILE*/
+
+
+/*CARDS ===============================*/
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(282px, max-content));
+  gap: 20px 17px;
+}
+
+.cards__item {
+  background: var(--color__white);
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.cards__img {
+  display: block;
+  max-width: 100%;
+  object-fit: cover;
+  -webkit-border-radius: 10px 10px 0 0;
+  -moz-border-radius: 10px 10px 0 0;
+  border-radius: 10px 10px 0 0;
+}
+
+.cards__caption {
+  display: flex;
+  padding: 25px 20px 30px 21px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cards__name {
+  max-width: 185px;
+  color: var(--color__black);
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 29px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  margin: 0;
+}
+
+.cards__like {
+  border: none;
+  background: url(../../images/icon__like.svg) no-repeat;
+  background-size: cover;
+  width: 22px;
+  height: 19px;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.cards__like:hover {
+  opacity: .5;
+}
+
+/*====================================== CARDS*/

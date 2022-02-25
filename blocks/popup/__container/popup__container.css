@@ -1,0 +1,26 @@
+.popup__container {
+  position: relative;
+  top: 13%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  max-width: 430px;
+  width: 100%;
+  padding: 40px;
+  margin: 0 auto;
+}
+
+@media (max-width: 550px) {
+  .popup__container {
+    padding: 48px 0;
+  }
+}
+
+/* Landscape phones and smaller */
+@media (max-width: 424px) {
+  .popup__container {
+    top: 7%;
+    max-width: 282px;
+    padding: 36px 0;
+  }
+}

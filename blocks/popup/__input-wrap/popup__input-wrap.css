@@ -1,0 +1,7 @@
+.popup__input-wrap {
+  display: grid;
+  gap: 30px;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}

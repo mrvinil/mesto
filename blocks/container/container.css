@@ -3,20 +3,6 @@
   margin: 0 auto;
 }
 
-/* Portrait tablets and medium desktops */
-@media (min-width: 1024px) and (max-width: 1279px) {
-  .container {
-    /*max-width: 928px;*/
-  }
-}
-
-/* Portrait tablets and small desktops */
-@media (min-width: 768px) and (max-width: 1023px) {
-  .container {
-    /*max-width: 720px;*/
-  }
-}
-
 /* Landscape phones and smaller */
 @media (max-width: 424px) {
   .container {

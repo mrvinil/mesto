@@ -36,6 +36,8 @@
 
 .header {
   display: flex;
+  max-width: 880px;
+  margin: 0 auto;
   position: relative;
   height: 74px;
 }
@@ -54,6 +56,19 @@
   background-size: cover;
   width: 142px;
   height: 33px;
+}
+
+/* Landscape phones and smaller */
+@media (max-width: 424px) {
+  .header {
+    height: 56px;
+  }
+
+  .header__logo {
+    width: 104px;
+    height: 24px;
+    margin-left: 27px;
+  }
 }
 
 /*================================= HEADER*/
@@ -84,7 +99,7 @@
 .profile__info {
   display: grid;
   grid-template-columns: repeat(2, max-content);
-  gap: 16px 18px;
+  gap: 8px 19px;
   align-items: baseline;
   align-content: center;
 }
@@ -92,7 +107,7 @@
 .profile__name {
   font-size: 42px;
   font-weight: 500;
-  line-height: 39px;
+  line-height: 48px;
   margin: 0;
 }
 
@@ -136,7 +151,7 @@
 @media (max-width: 720px) {
   .profile {
     flex-direction: column;
-    gap: 36px;
+    gap: 30px;
   }
   .profile__add {
     width: 100%;
@@ -151,7 +166,8 @@
     gap: 26px;
   }
   .profile__info {
-    gap: 14px 10px;
+    gap: 4px 10px;
+    padding-left: 27px;
   }
   .profile__name {
     font-size: 27px;
@@ -159,11 +175,14 @@
   }
   .profile__about {
     font-size: 14px;
-    grid-column: span 2 / auto;
+    grid-column: span 1 / auto;
   }
   .profile__edit {
     width: 18px;
     height: 18px;
+  }
+  .profile__add {
+    background-size: 16px;
   }
 }
 
@@ -196,7 +215,7 @@
 
 .cards__caption {
   display: flex;
-  padding: 25px 20px 30px 21px;
+  padding: 25px 20px 26px 21px;
   justify-content: space-between;
   align-items: center;
 }
@@ -227,6 +246,13 @@
   opacity: .5;
 }
 
+/* Landscape phones and smaller */
+@media (max-width: 424px) {
+  .cards__caption {
+    padding: 25px 20px 25px 21px;
+  }
+}
+
 /*====================================== CARDS*/
 
 
@@ -237,6 +263,13 @@
   font-size: 18px;
   line-height: 22px;
   margin: 0;
+}
+
+/* Landscape phones and smaller */
+@media (max-width: 424px) {
+  .footer__copyright {
+    font-size: 14px;
+  }
 }
 
 /*==================================== FOOTER*/

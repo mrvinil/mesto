@@ -9,14 +9,6 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 45px 0 60px;
-  font-family: 'Inter', Arial, sans-serif;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
-  -moz-text-size-adjust: 100%;
-  color: var(--color__white);
 }
 
 @media (min-width: 425px) and (max-width: 992px) {
@@ -273,3 +265,146 @@
 }
 
 /*==================================== FOOTER*/
+
+
+
+/*POPUP ====================================*/
+
+.popup {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+}
+
+.popup_opened {
+  display: block;
+}
+
+.popup__container {
+  position: relative;
+  top: 13%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  max-width: 430px;
+  width: 100%;
+  padding: 40px;
+  margin: 0 auto;
+}
+
+.popup__close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: none;
+  width: 32px;
+  height: 32px;
+  background: url(../../images/icon__close.svg) no-repeat;
+  background-size: 32px;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.popup__close:hover {
+  opacity: 0.6;
+}
+
+.popup__form {
+  background: var(--color__white);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  padding: 34px 36px 37px;
+}
+
+.popup__title {
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 29px;
+  color: var(--color__black);
+  margin: 0;
+  padding-bottom: 54px;
+}
+
+.popup__input-wrap {
+  display: grid;
+  gap: 30px;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.popup__input {
+  width: 100%;
+  font-size: 14px;
+  line-height: 17px;
+  border: 0;
+  border-bottom: 1px solid #ccc;
+  padding: 0 0 9px;
+}
+
+.popup__submit {
+  width: 100%;
+  height: 50px;
+  border: 0;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  background: var(--color__black);
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  color: var(--color__white);
+  margin-top: 48px;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.popup__submit:hover {
+  opacity: 0.8;
+}
+
+@media (max-width: 550px) {
+  .popup__container {
+    padding: 48px 0;
+  }
+}
+
+/* Landscape phones and smaller */
+@media (max-width: 424px) {
+  .popup__container {
+    top: 7%;
+    max-width: 282px;
+    padding: 36px 0;
+  }
+
+  .popup__close {
+    width: 20px;
+    height: 20px;
+    background-size: 20px;
+  }
+
+  .popup__form {
+    padding: 25px 22px;
+  }
+
+  .popup__title {
+    font-size: 18px;
+    line-height: 22px;
+    padding-bottom: 75px;
+  }
+
+  .popup__submit {
+    margin-top: 45px;
+    font-size: 14px;
+    line-height: 17px;
+    height: 46px;
+  }
+}
+/*==================================== POPUP*/

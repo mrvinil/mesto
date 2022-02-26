@@ -19,15 +19,11 @@ function openPopup() {
   inputName.value = profileName.textContent;
   inputJob.value = profileJob.textContent;
 }
-profileEditButton.addEventListener('click', openPopup);
-
 
 // закрываем попап
 function closePopup() {
   popupForm.classList.remove('popup_opened');
 }
-closePopupButton.addEventListener('click', closePopup);
-
 
 // обработчик отправки формы
 function formSubmitHandler(evt) {
@@ -40,4 +36,7 @@ function formSubmitHandler(evt) {
   popupForm.classList.remove('popup_opened');
 
 }
+
+profileEditButton.addEventListener('click', openPopup);
+closePopupButton.addEventListener('click', closePopup);
 formElement.addEventListener('submit', formSubmitHandler);

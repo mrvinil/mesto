@@ -3,7 +3,7 @@
   max-width: 880px;
   margin: 0 auto;
   position: relative;
-  height: 74px;
+  min-height: 74px;
 }
 
 .header::after {
@@ -18,6 +18,6 @@
 /* Landscape phones and smaller */
 @media (max-width: 424px) {
   .header {
-    height: 56px;
+    min-height: 56px;
   }
 }

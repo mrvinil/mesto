@@ -15,3 +15,9 @@
     grid-column: span 1 / auto;
   }
 }
+
+@media (max-width: 424px) {
+  .profile__about {
+    max-width: 235px;
+  }
+}

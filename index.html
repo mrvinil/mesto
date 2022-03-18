@@ -41,7 +41,7 @@
     </footer>
   </div>
 
-  <div class="popup">
+  <div class="popup" id="popup__profile">
     <div class="popup__container">
       <button class="popup__close" type="button"></button>
       <form action="#" name="profile" class="popup__form">
@@ -51,6 +51,20 @@
           <input type="text" name="job" class="popup__input popup__input_type_job" placeholder="О себе">
         </fieldset>
         <button class="popup__submit" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="popup" id="popup__card">
+    <div class="popup__container">
+      <button class="popup__close" type="button"></button>
+      <form action="#" name="profile" class="popup__form">
+        <h2 class="popup__title">Новое место</h2>
+        <fieldset class="popup__input-wrap">
+          <input type="text" name="name" class="popup__input popup__input_type_name" placeholder="Название">
+          <input type="text" name="link" class="popup__input popup__input_type_link" placeholder="Ссылка на картинку">
+        </fieldset>
+        <button class="popup__submit" type="submit">Создать</button>
       </form>
     </div>
   </div>

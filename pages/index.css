@@ -35,11 +35,17 @@
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 
 @import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/_type_modal-img/popup_type_modal-img.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popup/__container/popup__container.css);
+@import url(../blocks/popup/__container/_type_modal-img/popup__container_type_modal-img.css);
 @import url(../blocks/popup/__close/popup__close.css);
 @import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__title/popup__title.css);
 @import url(../blocks/popup/__input-wrap/popup__input-wrap.css);
 @import url(../blocks/popup/__input/popup__input.css);
 @import url(../blocks/popup/__submit/popup__submit.css);
+
+@import url(../blocks/modal/modal.css);
+@import url(../blocks/modal/__img/modal__img.css);
+@import url(../blocks/modal/__name/modal__name.css);

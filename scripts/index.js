@@ -50,13 +50,13 @@ const initialCards = [
   }
 ];
 
-function createCard(item) {
+function createCard(cardProperty) {
   const cardsElement = cardsTemplate.querySelector('.cards__item').cloneNode(true);
 
   // наполняем содержимым
-  cardsElement.querySelector('.cards__img').src = item.link;
-  cardsElement.querySelector('.cards__img').alt = item.name;
-  cardsElement.querySelector('.cards__name').textContent = item.name;
+  cardsElement.querySelector('.cards__img').src = cardProperty.link;
+  cardsElement.querySelector('.cards__img').alt = cardProperty.name;
+  cardsElement.querySelector('.cards__name').textContent = cardProperty.name;
 
   const cardLikeButton = cardsElement.querySelector('.cards__like');
   cardLikeButton.addEventListener('click', function(evt) {
@@ -66,18 +66,23 @@ function createCard(item) {
   const cardImage = cardsElement.querySelector('.cards__img');
   cardImage.addEventListener('click', function openViewImage() {
     openPopup(popupImage);
-    modalImage.src = item.link;
-    modalImage.alt = item.name;
-    modalName.textContent = item.name;
+    modalImage.src = cardProperty.link;
+    modalImage.alt = cardProperty.name;
+    modalName.textContent = cardProperty.name;
   });
 
   const cardDeleteButton = cardsElement.querySelector('.cards__trash');
   cardDeleteButton.addEventListener('click', deleteCard);
 
-  cardsWrap.prepend(cardsElement);
-  return createCard;
+  return cardsElement;
 }
-initialCards.map(createCard);
+
+function addCard(cardProperty) {
+  cardsWrap.prepend(createCard(cardProperty));
+}
+
+initialCards.forEach(addCard);
+
 
 function deleteCard(evt) {
   const card = evt.currentTarget.closest('.cards__item');
@@ -86,7 +91,6 @@ function deleteCard(evt) {
 
 
 function editProfile(evt) {
-  // получаем текущие значения и записываем в инпуты
   inputName.value = profileName.textContent;
   inputJob.value = profileJob.textContent;
 
@@ -104,26 +108,20 @@ function closePopup(evt) {
 // обработчик отправки формы
 function submitProfileFormHandler(evt) {
   evt.preventDefault();
-  // записываем новые значения из инпутов
   profileName.textContent = inputName.value;
   profileJob.textContent = inputJob.value;
-
-  // закрываем попап
   closePopup(evt.target.closest('.popup_opened'));
-
 }
 
 function createCardHandler(evt) {
   evt.preventDefault();
 
-  initialCards.unshift(
-    {
-      name: inputCardName.value,
-      link: inputCardLink.value
-    }
-  );
+  const cardProperty = {
+    name: inputCardName.value,
+    link: inputCardLink.value
+  }
 
-  createCard(initialCards[0]);
+  addCard(cardProperty)
   evt.currentTarget.reset();
 
   closePopup(evt.target.closest('.popup_opened'));

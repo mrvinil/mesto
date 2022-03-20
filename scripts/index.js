@@ -1,6 +1,6 @@
 const profileEditButton = document.querySelector('.profile__edit');
 const addCardButton = document.querySelector('.profile__add');
-const closePopupButton = document.querySelectorAll('.popup__close');
+const closePopupButtons = document.querySelectorAll('.popup__close');
 
 const popupImage = document.querySelector('#popup__img');
 const popupFormProfile = document.querySelector('#popup__profile');
@@ -16,6 +16,12 @@ const inputCardLink = document.querySelector('.popup__input_card-link');
 
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__about');
+
+const cardsWrap = document.querySelector('.cards');
+const cardsTemplate = document.querySelector('#card-template').content;
+
+const modalImage = document.querySelector('.modal__img');
+const modalName = document.querySelector('.modal__name');
 
 const initialCards = [
   {
@@ -45,8 +51,6 @@ const initialCards = [
 ];
 
 function createCard(item) {
-  const cardsWrap = document.querySelector('.cards');
-  const cardsTemplate = document.querySelector('#card-template').content;
   const cardsElement = cardsTemplate.querySelector('.cards__item').cloneNode(true);
 
   // наполняем содержимым
@@ -62,8 +66,6 @@ function createCard(item) {
   const cardImage = cardsElement.querySelector('.cards__img');
   cardImage.addEventListener('click', function openViewImage() {
     openPopup(popupImage);
-    let modalImage = document.querySelector('.modal__img');
-    let modalName = document.querySelector('.modal__name');
     modalImage.src = item.link;
     modalImage.alt = item.name;
     modalName.textContent = item.name;
@@ -100,7 +102,7 @@ function closePopup(evt) {
 }
 
 // обработчик отправки формы
-function formSubmitHandler(evt) {
+function submitProfileFormHandler(evt) {
   evt.preventDefault();
   // записываем новые значения из инпутов
   profileName.textContent = inputName.value;
@@ -134,9 +136,9 @@ profileEditButton.addEventListener('click', () => editProfile(popupFormProfile))
 addCardButton.addEventListener('click', () => openPopup(popupFormCard));
 
 // ловим клик по кнопке и закрываем соответствующий попап
-closePopupButton.forEach((i) => {
+closePopupButtons.forEach((i) => {
   i.addEventListener('click', () => closePopup(i.closest('.popup_opened')));
 });
 
-editProfileForm.addEventListener('submit', formSubmitHandler);
+editProfileForm.addEventListener('submit', submitProfileFormHandler);
 createCardForm.addEventListener('submit', createCardHandler);

@@ -1,6 +1,7 @@
 const profileEditButton = document.querySelector('.profile__edit');
 const addCardButton = document.querySelector('.profile__add');
 const popupsList = Array.from(document.querySelectorAll('.popup'));
+const inactiveButton = document.querySelector('.popup__button_disabled');
 
 const popupImage = document.querySelector('#popup__img');
 const popupFormProfile = document.querySelector('#popup__profile');
@@ -52,10 +53,11 @@ const initialCards = [
 
 function createCard(cardProperty) {
   const cardsElement = cardsTemplate.querySelector('.cards__item').cloneNode(true);
+  const cardImage = cardsElement.querySelector('.cards__img');
 
   // наполняем содержимым
-  cardsElement.querySelector('.cards__img').src = cardProperty.link;
-  cardsElement.querySelector('.cards__img').alt = cardProperty.name;
+  cardImage.src = cardProperty.link;
+  cardImage.alt = cardProperty.name;
   cardsElement.querySelector('.cards__name').textContent = cardProperty.name;
 
   const cardLikeButton = cardsElement.querySelector('.cards__like');
@@ -63,7 +65,6 @@ function createCard(cardProperty) {
     evt.target.classList.toggle('cards__like_active');
   });
 
-  const cardImage = cardsElement.querySelector('.cards__img');
   cardImage.addEventListener('click', function openViewImage() {
     openPopup(popupImage);
     modalImage.src = cardProperty.link;
@@ -107,7 +108,7 @@ function closePopup(evt) {
   document.removeEventListener('keydown', closePopupInEscape);
 }
 
-function closePopupOverlayHandler(popup) {
+function handlerPopupOverlayClose(popup) {
   popup.addEventListener('click', (evt) => {
     if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close')) {
       closePopup(popup);
@@ -123,14 +124,14 @@ function closePopupInEscape(evt) {
 }
 
 // обработчик отправки формы
-function submitProfileFormHandler(evt) {
+function handlerProfileFormSubmit(evt) {
   evt.preventDefault();
   profileName.textContent = inputName.value;
   profileJob.textContent = inputJob.value;
   closePopup(evt.target.closest('.popup_opened'));
 }
 
-function createCardHandler(evt) {
+function handlerCardCreate(evt) {
   evt.preventDefault();
 
   const cardProperty = {
@@ -140,7 +141,8 @@ function createCardHandler(evt) {
 
   addCard(cardProperty)
   evt.currentTarget.reset();
-
+  evt.submitter.classList.add('popup__button_disabled');
+  evt.submitter.setAttribute('disabled', 'true');
   closePopup(evt.target.closest('.popup_opened'));
 }
 
@@ -150,7 +152,7 @@ profileEditButton.addEventListener('click', () => editProfile(popupFormProfile))
 // ловим клик по кнопке и открываем соответствующий попап
 addCardButton.addEventListener('click', () => openPopup(popupFormCard));
 
-popupsList.forEach(closePopupOverlayHandler);
+popupsList.forEach(handlerPopupOverlayClose);
 
-editProfileForm.addEventListener('submit', submitProfileFormHandler);
-createCardForm.addEventListener('submit', createCardHandler);
+editProfileForm.addEventListener('submit', handlerProfileFormSubmit);
+createCardForm.addEventListener('submit', handlerCardCreate);

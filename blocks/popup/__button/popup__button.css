@@ -1,4 +1,4 @@
-.popup__submit {
+.popup__button {
   width: 100%;
   height: 50px;
   border: 1px solid transparent;
@@ -15,13 +15,13 @@
   transition: .2s ease;
 }
 
-.popup__submit:hover {
+.popup__button:hover {
   opacity: 0.8;
 }
 
 /* Landscape phones and smaller */
 @media (max-width: 424px) {
-  .popup__submit {
+  .popup__button {
     margin-top: 45px;
     font-size: 14px;
     line-height: 17px;

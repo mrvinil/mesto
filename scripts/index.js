@@ -1,6 +1,7 @@
 const profileEditButton = document.querySelector('.profile__edit');
 const addCardButton = document.querySelector('.profile__add');
-const closePopupButtons = document.querySelectorAll('.popup__close');
+//const closePopupButtons = document.querySelectorAll('.popup__close');
+const popupsList = Array.from(document.querySelectorAll('.popup'));
 
 const popupImage = document.querySelector('#popup__img');
 const popupFormProfile = document.querySelector('#popup__profile');
@@ -99,10 +100,27 @@ function editProfile(evt) {
 
 function openPopup(evt) {
   evt.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupInEscape);
 }
 
 function closePopup(evt) {
   evt.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupInEscape);
+}
+
+function closePopupOverlayHandler(popup) {
+  popup.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close')) {
+      closePopup(popup);
+    }
+  });
+}
+
+function closePopupInEscape(evt) {
+  if (evt.key === 'Escape') {
+    const activePopup = document.querySelector('.popup_opened');
+    closePopup(activePopup);
+  }
 }
 
 // обработчик отправки формы
@@ -133,10 +151,7 @@ profileEditButton.addEventListener('click', () => editProfile(popupFormProfile))
 // ловим клик по кнопке и открываем соответствующий попап
 addCardButton.addEventListener('click', () => openPopup(popupFormCard));
 
-// ловим клик по кнопке и закрываем соответствующий попап
-closePopupButtons.forEach((i) => {
-  i.addEventListener('click', () => closePopup(i.closest('.popup_opened')));
-});
+popupsList.forEach(closePopupOverlayHandler);
 
 editProfileForm.addEventListener('submit', submitProfileFormHandler);
 createCardForm.addEventListener('submit', createCardHandler);

@@ -1,4 +1,4 @@
-.popup__submit_disabled {
+.popup__button_disabled {
   border: 1px solid var(--color__black);
   color: var(--color__black);
   background: var(--color__white);

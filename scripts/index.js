@@ -1,6 +1,5 @@
 const profileEditButton = document.querySelector('.profile__edit');
 const addCardButton = document.querySelector('.profile__add');
-//const closePopupButtons = document.querySelectorAll('.popup__close');
 const popupsList = Array.from(document.querySelectorAll('.popup'));
 
 const popupImage = document.querySelector('#popup__img');

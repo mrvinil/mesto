@@ -108,7 +108,7 @@ function closePopup(evt) {
   document.removeEventListener('keydown', closePopupInEscape);
 }
 
-function handlerPopupOverlayClose(popup) {
+function handlePopupOverlayClose(popup) {
   popup.addEventListener('click', (evt) => {
     if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close')) {
       closePopup(popup);
@@ -124,14 +124,14 @@ function closePopupInEscape(evt) {
 }
 
 // обработчик отправки формы
-function handlerProfileFormSubmit(evt) {
+function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileName.textContent = inputName.value;
   profileJob.textContent = inputJob.value;
   closePopup(evt.target.closest('.popup_opened'));
 }
 
-function handlerCardCreate(evt) {
+function handleCardCreate(evt) {
   evt.preventDefault();
 
   const cardProperty = {
@@ -152,7 +152,7 @@ profileEditButton.addEventListener('click', () => editProfile(popupFormProfile))
 // ловим клик по кнопке и открываем соответствующий попап
 addCardButton.addEventListener('click', () => openPopup(popupFormCard));
 
-popupsList.forEach(handlerPopupOverlayClose);
+popupsList.forEach(handlePopupOverlayClose);
 
-editProfileForm.addEventListener('submit', handlerProfileFormSubmit);
-createCardForm.addEventListener('submit', handlerCardCreate);
+editProfileForm.addEventListener('submit', handleProfileFormSubmit);
+createCardForm.addEventListener('submit', handleCardCreate);

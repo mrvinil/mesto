@@ -1,6 +1,6 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
-import {initialCards, rest} from "../utils/data.js";
+import {initialCards, config} from "../utils/data.js";
 
 const profileEditButton = document.querySelector('.profile__edit');
 const addCardButton = document.querySelector('.profile__add');
@@ -26,6 +26,8 @@ const cardsWrap = document.querySelector('.cards');
 const modalImage = document.querySelector('.modal__img');
 const modalName = document.querySelector('.modal__name');
 
+const CARD_TEMPLATE = '#card-template';
+
 
 function addCard(data, cardSelector, handleImageOpen) {
   const card = new Card(data, cardSelector, handleImageOpen);
@@ -33,20 +35,17 @@ function addCard(data, cardSelector, handleImageOpen) {
 }
 
 initialCards.forEach((item) => {
-  const cardsElement = addCard(item, '#card-template', handleImageOpen);
+  const cardsElement = addCard(item, CARD_TEMPLATE, handleImageOpen);
   cardsWrap.append(cardsElement);
 });
 
 function handleCardCreate(evt) {
   evt.preventDefault();
-
-  const cardProperty = addCard({name: inputCardName.value, link: inputCardLink.value}, '#card-template', handleImageOpen);
+  const cardProperty = addCard({name: inputCardName.value, link: inputCardLink.value}, CARD_TEMPLATE, handleImageOpen);
   cardsWrap.prepend(cardProperty);
-
   evt.currentTarget.reset();
-  evt.submitter.classList.add('popup__button_disabled');
-  evt.submitter.setAttribute('disabled', 'true');
-  closePopup(evt.target.closest('.popup_opened'));
+  cardFormValidator.resetFormValidation();
+  closePopup(popupFormCard);
 }
 
 function handleImageOpen() {
@@ -57,16 +56,14 @@ function handleImageOpen() {
 }
 
 // подключение валидации форм
-const profileFormValidator = new FormValidator(rest, editProfileForm);
-const cardFormValidator = new FormValidator(rest, createCardForm);
-
+const profileFormValidator = new FormValidator(config, editProfileForm);
+const cardFormValidator = new FormValidator(config, createCardForm);
 profileFormValidator.enableValidation();
 cardFormValidator.enableValidation();
 
 function editProfile(evt) {
   inputName.value = profileName.textContent;
   inputJob.value = profileJob.textContent;
-
   openPopup(evt);
 }
 
@@ -100,16 +97,16 @@ function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileName.textContent = inputName.value;
   profileJob.textContent = inputJob.value;
-  closePopup(evt.target.closest('.popup_opened'));
+  evt.currentTarget.reset();
+  profileFormValidator.resetFormValidation();
+  closePopup(popupFormProfile);
 }
 
 // ловим клик по кнопке и открываем соответствующий попап
 profileEditButton.addEventListener('click', () => editProfile(popupFormProfile));
-
 // ловим клик по кнопке и открываем соответствующий попап
 addCardButton.addEventListener('click', () => openPopup(popupFormCard));
 
 popupsList.forEach(handlePopupOverlayClose);
-
 editProfileForm.addEventListener('submit', handleProfileFormSubmit);
 createCardForm.addEventListener('submit', handleCardCreate);

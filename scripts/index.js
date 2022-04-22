@@ -1,5 +1,6 @@
 import Card from './Card.js';
-import {initialCards} from "../utils/data.js";
+import FormValidator from './FormValidator.js';
+import {initialCards, rest} from "../utils/data.js";
 
 const profileEditButton = document.querySelector('.profile__edit');
 const addCardButton = document.querySelector('.profile__add');
@@ -54,6 +55,13 @@ function handleImageOpen() {
   modalImage.alt = this._name;
   modalName.textContent = this._name;
 }
+
+// валидация форм
+const profileFormValidator = new FormValidator(rest, editProfileForm);
+const cardFormValidator = new FormValidator(rest, createCardForm);
+
+profileFormValidator.enableValidation();
+cardFormValidator.enableValidation();
 
 function editProfile(evt) {
   inputName.value = profileName.textContent;

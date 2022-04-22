@@ -56,7 +56,7 @@ function handleImageOpen() {
   modalName.textContent = this._name;
 }
 
-// валидация форм
+// подключение валидации форм
 const profileFormValidator = new FormValidator(rest, editProfileForm);
 const cardFormValidator = new FormValidator(rest, createCardForm);
 

@@ -1,9 +1,9 @@
 export default class Card {
-  constructor(data, cardSelector, handleImageOpen) {
+  constructor({data, handleCardClick}, cardSelector) {
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector;
-    this._handleImageOpen = handleImageOpen;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -40,8 +40,12 @@ export default class Card {
     });
 
     this._image.addEventListener('click', () => {
-      this._handleImageOpen();
+      this._viewImage();
     });
+  }
+
+  _viewImage() {
+    this._handleCardClick(this._name, this._link);
   }
 
   _handleLike() {

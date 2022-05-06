@@ -4,8 +4,8 @@ import Section from "./Section.js";
 import PopupWithImage from "./PopupWithImage.js";
 import PopupWithForm from "./PopupWithForm.js";
 import UserInfo from "./UserInfo.js";
+import {initialCards} from "../utils/data.js";
 import {
-  initialCards,
   config,
   CARD_TEMPLATE,
   CARD_LIST,
@@ -22,7 +22,7 @@ import {
   inputUserJob,
   inputCardName,
   inputCardLink,
-} from "../utils/data.js";
+} from "../utils/constants.js";
 
 // Создаем объект содержащий секцию с карточками и отрисовываем список карточек
 const cardList = new Section({renderer: (cardProperty) => cardList.addItem(addCard(cardProperty))}, CARD_LIST);

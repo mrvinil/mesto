@@ -1,59 +1,73 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
-import {initialCards, config} from "../utils/data.js";
+import Section from "./Section.js";
+import PopupWithImage from "./PopupWithImage.js";
+import PopupWithForm from "./PopupWithForm.js";
+import UserInfo from "./UserInfo.js";
+import {
+  initialCards,
+  config,
+  CARD_TEMPLATE,
+  CARD_LIST,
+  POPUP_VIEW_IMAGE,
+  USER_NAME,
+  USER_JOB,
+  POPUP_FORM_PROFILE,
+  POPUP_FORM_CARD,
+  profileEditButton,
+  addCardButton,
+  editProfileForm,
+  createCardForm,
+  inputUserName,
+  inputUserJob,
+  inputCardName,
+  inputCardLink,
+} from "../utils/data.js";
 
-const profileEditButton = document.querySelector('.profile__edit');
-const addCardButton = document.querySelector('.profile__add');
-const popupsList = Array.from(document.querySelectorAll('.popup'));
+// Создаем объект содержащий секцию с карточками и отрисовываем список карточек
+const cardList = new Section({renderer: (cardProperty) => cardList.addItem(addCard(cardProperty))}, CARD_LIST);
+cardList.renderItems(initialCards);
 
-const popupImage = document.querySelector('#popup__img');
-const popupFormProfile = document.querySelector('#popup__profile');
-const popupFormCard = document.querySelector('#popup__card');
-const editProfileForm = document.querySelector('#popup__form_profile');
-const createCardForm = document.querySelector('#popup__form_card');
+// Создаем объект полноэкранного просмотра изображения
+// и настраиваем закрытие просмотра изображения по клику вне модального окна
+// и кнопке его закрытия
+const popupViewImage = new PopupWithImage(POPUP_VIEW_IMAGE);
+popupViewImage.setEventListeners();
 
-const inputName = document.querySelector('.popup__input_type_name');
-const inputJob = document.querySelector('.popup__input_type_job');
-
-const inputCardName = document.querySelector('.popup__input_card-name');
-const inputCardLink = document.querySelector('.popup__input_card-link');
-
-const profileName = document.querySelector('.profile__name');
-const profileJob = document.querySelector('.profile__about');
-
-const cardsWrap = document.querySelector('.cards');
-
-const modalImage = document.querySelector('.modal__img');
-const modalName = document.querySelector('.modal__name');
-
-const CARD_TEMPLATE = '#card-template';
-
-
-function addCard(data, cardSelector, handleImageOpen) {
-  const card = new Card(data, cardSelector, handleImageOpen);
-  return card.renderCard();
+// Функция создания карточки
+function addCard(cardProperty) {
+  return new Card(
+    {
+      data: cardProperty,
+      handleCardClick: (name, link) => {
+        popupViewImage.open(name, link);
+      },
+    },
+    CARD_TEMPLATE
+  ).renderCard();
 }
 
-initialCards.forEach((item) => {
-  const cardsElement = addCard(item, CARD_TEMPLATE, handleImageOpen);
-  cardsWrap.append(cardsElement);
+// Создаем пользователя
+const userData = {
+  userNameSelector: USER_NAME,
+  userJobSelector: USER_JOB,
+};
+const user = new UserInfo(userData);
+
+// Создаем форму редактирования и настраиваем слушателей
+const editProfile = new PopupWithForm(POPUP_FORM_PROFILE, { handleFormSubmit: (userData) => user.setUserInfo(userData.userName, userData.userJob), });
+editProfile.setEventListeners();
+
+// Создаем форму добавления карточки и настраиваем слушателей
+const formAddCard = new PopupWithForm(POPUP_FORM_CARD, { handleFormSubmit: () => {
+    const cardProperty = {
+      name: inputCardName.value,
+      link: inputCardLink.value
+    };
+    cardList.addItem(addCard(cardProperty));
+  },
 });
-
-function handleCardCreate(evt) {
-  evt.preventDefault();
-  const cardProperty = addCard({name: inputCardName.value, link: inputCardLink.value}, CARD_TEMPLATE, handleImageOpen);
-  cardsWrap.prepend(cardProperty);
-  evt.currentTarget.reset();
-  cardFormValidator.resetFormValidation();
-  closePopup(popupFormCard);
-}
-
-function handleImageOpen() {
-  openPopup(popupImage);
-  modalImage.src = this._link;
-  modalImage.alt = this._name;
-  modalName.textContent = this._name;
-}
+formAddCard.setEventListeners();
 
 // подключение валидации форм
 const profileFormValidator = new FormValidator(config, editProfileForm);
@@ -61,52 +75,17 @@ const cardFormValidator = new FormValidator(config, createCardForm);
 profileFormValidator.enableValidation();
 cardFormValidator.enableValidation();
 
-function editProfile(evt) {
-  inputName.value = profileName.textContent;
-  inputJob.value = profileJob.textContent;
-  openPopup(evt);
-}
-
-function openPopup(evt) {
-  evt.classList.add('popup_opened');
-  document.addEventListener('keydown', closePopupInEscape);
-}
-
-function closePopup(evt) {
-  evt.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closePopupInEscape);
-}
-
-function handlePopupOverlayClose(popup) {
-  popup.addEventListener('click', (evt) => {
-    if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close')) {
-      closePopup(popup);
-    }
-  });
-}
-
-function closePopupInEscape(evt) {
-  if (evt.key === 'Escape') {
-    const activePopup = document.querySelector('.popup_opened');
-    closePopup(activePopup);
-  }
-}
-
-// обработчик отправки формы
-function handleProfileFormSubmit(evt) {
-  evt.preventDefault();
-  profileName.textContent = inputName.value;
-  profileJob.textContent = inputJob.value;
-  evt.currentTarget.reset();
+function popupEditOpen() {
+  inputUserName.value = user.getUserInfo().userName;
+  inputUserJob.value = user.getUserInfo().userJob;
   profileFormValidator.resetFormValidation();
-  closePopup(popupFormProfile);
+  editProfile.open();
 }
 
-// ловим клик по кнопке и открываем соответствующий попап
-profileEditButton.addEventListener('click', () => editProfile(popupFormProfile));
-// ловим клик по кнопке и открываем соответствующий попап
-addCardButton.addEventListener('click', () => openPopup(popupFormCard));
+function popupAddOpen() {
+  cardFormValidator.resetFormValidation();
+  formAddCard.open();
+}
 
-popupsList.forEach(handlePopupOverlayClose);
-editProfileForm.addEventListener('submit', handleProfileFormSubmit);
-createCardForm.addEventListener('submit', handleCardCreate);
+profileEditButton.addEventListener('click', popupEditOpen);
+addCardButton.addEventListener('click', popupAddOpen);

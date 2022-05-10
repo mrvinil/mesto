@@ -15,3 +15,5 @@
 - Grid Layout
 - Media queries
 - JavaScript
+- ООП
+- WebPack

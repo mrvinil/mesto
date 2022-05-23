@@ -10,7 +10,6 @@
   line-height: 22px;
   text-align: center;
   color: var(--color__white);
-  margin-top: 48px;
   cursor: pointer;
   transition: .2s ease;
 }
@@ -22,7 +21,6 @@
 /* Landscape phones and smaller */
 @media (max-width: 424px) {
   .popup__button {
-    margin-top: 45px;
     font-size: 14px;
     line-height: 17px;
     height: 46px;

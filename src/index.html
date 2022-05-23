@@ -62,6 +62,22 @@
     </div>
   </div>
 
+  <div class="popup" id="popup__avatar">
+    <div class="popup__container">
+      <button class="popup__close" type="button"></button>
+      <form action="#" name="profileAvatar" class="popup__form" id="popup__form_avatar" novalidate>
+        <h2 class="popup__title">Обновить аватар</h2>
+        <fieldset class="popup__field-wrap">
+          <label class="popup__field">
+            <input type="url" name="avatarUrl" id="avatarUrl-input" class="popup__input popup__input_card-link" placeholder="Ссылка на картинку" required>
+            <span class="popup__error avatarUrl-input-error"></span>
+          </label>
+        </fieldset>
+        <button class="popup__button" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
+
   <div class="popup" id="popup__card">
     <div class="popup__container">
       <button class="popup__close" type="button"></button>

@@ -1,4 +1,4 @@
-.cards__like {
+.cards__like-button {
   border: none;
   background: url(../../../images/icon__like.svg) no-repeat;
   background-size: cover;
@@ -8,6 +8,6 @@
   transition: .2s ease;
 }
 
-.cards__like:hover {
+.cards__like-button:hover {
   opacity: .5;
 }

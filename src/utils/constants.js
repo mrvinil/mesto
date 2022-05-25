@@ -25,6 +25,7 @@ const CARD_LIST = '.cards';
 const POPUP_VIEW_IMAGE = '#popup__img';
 const USER_NAME = '.profile__name';
 const USER_JOB = '.profile__about';
+const USER_AVATAR = '.profile__avatar';
 const POPUP_FORM_PROFILE = '#popup__profile';
 const POPUP_FORM_CARD = '#popup__card';
 
@@ -35,6 +36,7 @@ export {
   POPUP_VIEW_IMAGE,
   USER_NAME,
   USER_JOB,
+  USER_AVATAR,
   POPUP_FORM_PROFILE,
   POPUP_FORM_CARD,
   profileEditButton,

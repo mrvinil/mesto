@@ -5,7 +5,9 @@ export default class PopupWithConfirm extends Popup {
     super(popupSelector)
     this._handleFormSubmit = handleFormSubmit;
     this._popupForm = this._popup.querySelector('.popup__form');
-    this.submit = this._popup.querySelectorAll('.popup__button');
+
+    this.submit = this._popup.querySelector('.popup__button');
+    this._popupButtonTextDefault = this.submit.textContent;
   }
 
   open(card, cardID) {
@@ -24,9 +26,9 @@ export default class PopupWithConfirm extends Popup {
 
   renderLoading(isLoading) {
     if(isLoading) {
-      this.submit.textContent = 'Удаляю...'
+      this.submit.textContent = 'Удаляю...';
     } else {
-      this.submit.textContent = 'Да'
+      this.submit.textContent = this._popupButtonTextDefault;
     }
   }
 }

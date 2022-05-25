@@ -85,5 +85,9 @@ export default class Api {
     })
       .then(this._checkResponse);
   }
+
+  getAllNeededData() {
+    return Promise.all([this.getInitialCards(), this.getUserInfo()]);
+  }
 }
 

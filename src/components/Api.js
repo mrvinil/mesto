@@ -19,7 +19,7 @@ export default class Api {
       .then(this._checkResponse);
   }
 
-  addUserCard(data) {
+  addCard(data) {
     return fetch(`${this._url}/cards`, {
       method: 'POST',
       headers: this._headers,
@@ -27,6 +27,14 @@ export default class Api {
         name: data.name,
         link: data.link,
       }),
+    })
+      .then(this._checkResponse);
+  }
+
+  deleteCard(cardID) {
+    return fetch(`${this._url}/cards/${cardID}`, {
+      method: 'DELETE',
+      headers: this._headers
     })
       .then(this._checkResponse);
   }
@@ -50,5 +58,7 @@ export default class Api {
     })
       .then(this._checkResponse);
   }
+
+
 }
 

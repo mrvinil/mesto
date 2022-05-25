@@ -30,5 +30,25 @@ export default class Api {
     })
       .then(this._checkResponse);
   }
+
+  getUserInfo() {
+    return fetch(`${this._url}/users/me`, {
+      method: 'GET',
+      headers: this._headers
+    })
+      .then(this._checkResponse);
+  }
+
+  editUserInfo(userData) {
+    return fetch(`${this._url}/users/me`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: userData.userName,
+        about: userData.userJob
+      }),
+    })
+      .then(this._checkResponse);
+  }
 }
 

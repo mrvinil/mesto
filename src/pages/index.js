@@ -25,7 +25,6 @@ import PopupWithConfirm from '../components/PopupWithConfirm.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
 
-// Создаем api работы с сервером
 const api = new Api ({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-41',
   headers: {
@@ -34,13 +33,10 @@ const api = new Api ({
   }
 });
 
-// Создаем пользователя
 const user = new UserInfo(userData);
 
-// Создаем объект содержащий секцию с карточками
 const cardList = new Section({renderer: createCard}, CARD_LIST);
 
-// Функция создания карточки
 function createCard(cardData) {
   return new Card({
       data: cardData,
@@ -60,12 +56,11 @@ function createCard(cardData) {
     },
     CARD_TEMPLATE,
     user.getUserID()
-  ).renderCard(); // вызываем метод, который возвращает разметку карточки
+  ).renderCard();
 }
 
 const popupViewImage = new PopupWithImage(POPUP_VIEW_IMAGE);
 
-// форма подтверждения действия
 const formConfirm = new PopupWithConfirm(POPUP_FORM_CARD_DELETE, {
   handleFormSubmit: (card, id) => {
     formConfirm.renderLoading();
@@ -81,7 +76,6 @@ const formConfirm = new PopupWithConfirm(POPUP_FORM_CARD_DELETE, {
   },
 });
 
-//форма редактирования профиля
 const editProfile = new PopupWithForm(POPUP_FORM_PROFILE, {
   handleFormSubmit: (userData) => {
     editProfile.renderLoading();
@@ -96,7 +90,6 @@ const editProfile = new PopupWithForm(POPUP_FORM_PROFILE, {
 });
 
 
-// форма добавления карточки
 const formAddCard = new PopupWithForm(POPUP_FORM_CARD, {
   handleFormSubmit: (item) => {
     const cardProperty = {
@@ -115,7 +108,6 @@ const formAddCard = new PopupWithForm(POPUP_FORM_CARD, {
 });
 
 
-// форма редактирования аватара профиля
 const formEditAvatar = new PopupWithForm(POPUP_FORM_AVATAR, {
   handleFormSubmit: (avatar) => {
     formEditAvatar.renderLoading();
@@ -153,11 +145,13 @@ api.getAllNeededData()
 
     // подключение валидации
     enableValidation(config);
-    // Вешаем слушателей на кнопки открытия форм
+
+    // слушатели форм
     profileEditButton.addEventListener('click', popupEditOpen);
     addCardButton.addEventListener('click', popupAddOpen);
     avatarEditButton.addEventListener('click', popupAvatarEditOpen);
-    // Вешаем слушателей на событие отправки формы
+
+    // слушатели отправки
     popupViewImage.setEventListeners();
     formConfirm.setEventListeners();
     editProfile.setEventListeners();

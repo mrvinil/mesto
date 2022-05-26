@@ -1,7 +1,7 @@
 import Popup from './Popup.js';
 
 export default class PopupWithConfirm extends Popup {
-  constructor(popupSelector, {handleFormSubmit}) {
+  constructor(popupSelector, { handleFormSubmit }) {
     super(popupSelector)
     this._handleFormSubmit = handleFormSubmit;
     this._popupForm = this._popup.querySelector('.popup__form');
@@ -24,7 +24,7 @@ export default class PopupWithConfirm extends Popup {
     });
   }
 
-  renderLoading(isLoading) {
+  renderLoading(isLoading = true) {
     if(isLoading) {
       this.submit.textContent = 'Удаляю...';
     } else {

@@ -1,5 +1,3 @@
-import Api from "../components/Api";
-
 const config = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
@@ -21,7 +19,7 @@ const editProfileAvatarForm = forms.profileAvatar;
 const inputUserName = editProfileForm.elements.userName;
 const inputUserJob = editProfileForm.elements.userJob;
 
-const inputAvatarLink = editProfileAvatarForm.elements.avatarUrl;
+const inputAvatarLink = editProfileAvatarForm.elements.avatarLink;
 
 const inputCardName = document.querySelector('.popup__input_card-name');
 const inputCardLink = document.querySelector('.popup__input_card-link');
@@ -67,13 +65,4 @@ export {
   inputCardLink,
   inputAvatarLink,
   userData,
-  optionsApi,
 }
-
-const optionsApi = {
-  url: "https://mesto.nomoreparties.co/v1/cohort-41",
-  headers: {
-    authorization: "94f82fe8-d5f1-4c97-b104-8e3f90c97123",
-    "Content-Type": "application/json",
-  }
-};

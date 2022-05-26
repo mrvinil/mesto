@@ -1,14 +1,10 @@
 import './index.css';
 
-import {initialCards} from '../utils/data.js';
 import {
   config,
   CARD_TEMPLATE,
   CARD_LIST,
   POPUP_VIEW_IMAGE,
-  USER_NAME,
-  USER_JOB,
-  USER_AVATAR,
   POPUP_FORM_PROFILE,
   POPUP_FORM_AVATAR,
   POPUP_FORM_CARD,
@@ -16,22 +12,12 @@ import {
   profileEditButton,
   addCardButton,
   avatarEditButton,
-  editProfileForm,
-  createCardForm,
-  inputUserName,
-  inputUserJob,
-  inputCardName,
-  inputCardLink,
-  inputAvatarLink,
-  editProfileAvatarForm,
   userData,
-  optionsApi,
 } from '../utils/constants.js';
 
 import { enableValidation, formValidators } from "../utils/formValidators.js";
 
 import Card from '../components/Card.js';
-import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
@@ -40,7 +26,13 @@ import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
 
 // Создаем api работы с сервером
-const api = new Api(optionsApi);
+const api = new Api ({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-41',
+  headers: {
+    authorization: '94f82fe8-d5f1-4c97-b104-8e3f90c97123',
+    'Content-Type': 'application/json',
+  }
+});
 
 // Создаем пользователя
 const user = new UserInfo(userData);
@@ -121,13 +113,13 @@ const formAddCard = new PopupWithForm(POPUP_FORM_CARD, {
       .finally(() => formAddCard.renderLoading(false));
   },
 });
-//formAddCard.setEventListeners();
+
 
 // форма редактирования аватара профиля
 const formEditAvatar = new PopupWithForm(POPUP_FORM_AVATAR, {
   handleFormSubmit: (avatar) => {
     formEditAvatar.renderLoading();
-    api.editUserAvatar(avatar.avatarUrl)
+    api.editUserAvatar(avatar.avatarLink)
       .then((res) => {
         user.setUserInfo(res);
         formEditAvatar.close();
@@ -136,29 +128,6 @@ const formEditAvatar = new PopupWithForm(POPUP_FORM_AVATAR, {
       .finally(() => formEditAvatar.renderLoading(false));
   },
 });
-
-// const profileFormValidator = new FormValidator(config, editProfileForm);
-// const cardFormValidator = new FormValidator(config, createCardForm);
-// const avatarFormValidator = new FormValidator(config, editProfileAvatarForm);
-// profileFormValidator.enableValidation();
-// cardFormValidator.enableValidation();
-//
-// function popupEditOpen() {
-//   inputUserName.value = user.getUserInfo().userName;
-//   inputUserJob.value = user.getUserInfo().userJob;
-//   profileFormValidator.resetFormValidation();
-//   editProfile.open();
-// }
-//
-// function popupAddOpen() {
-//   cardFormValidator.resetFormValidation();
-//   formAddCard.open();
-// }
-//
-// function popupAvatarEditOpen() {
-//   avatarFormValidator.resetFormValidation();
-//   formEditAvatar.open();
-// }
 
 function popupEditOpen() {
   formValidators.profileForm.resetFormValidation();
@@ -176,19 +145,13 @@ function popupAvatarEditOpen() {
   formEditAvatar.open();
 }
 
-// api.getAllNeededData()
-//   .then(( [cards, userData] ) => {
-//     user.setUserInfo(userData);
-//     user.getUserID();
-//     cardList.renderItems(cards)
-//   })
-//   .catch((err) => console.log(err))
+api.getAllNeededData()
+  .then(( [cards, userData] ) => {
+    user.setUserInfo(userData);
+    user.getUserID();
+    cardList.renderItems(cards)
 
-Promise.all([api.getUserInfo(), api.getInitialCards()])
-  .then((res) => {
-    user.setUserInfo(res[0]);
-    cardList.renderItems(res[1].reverse());
-    // Подключаем валидацию форм
+    // подключение валидации
     enableValidation(config);
     // Вешаем слушателей на кнопки открытия форм
     profileEditButton.addEventListener('click', popupEditOpen);
@@ -200,9 +163,5 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     editProfile.setEventListeners();
     formAddCard.setEventListeners();
     formEditAvatar.setEventListeners();
-
   })
-  .catch((err) => console.log(err));
-
-//profileEditButton.addEventListener('click', popupEditOpen);
-//addCardButton.addEventListener('click', popupAddOpen);
+  .catch((err) => console.log(err))

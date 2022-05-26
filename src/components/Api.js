@@ -1,7 +1,7 @@
 export default class Api {
-  constructor(config) {
-    this._url = config.url;
-    this._headers = config.headers;
+  constructor(options) {
+    this._baseUrl = options.baseUrl;
+    this._headers = options.headers;
   }
 
   _checkResponse(res) {
@@ -12,7 +12,7 @@ export default class Api {
   }
 
   getInitialCards() {
-    return fetch(`${this._url}/cards`, {
+    return fetch(`${this._baseUrl}/cards`, {
       method: 'GET',
       headers: this._headers
     })
@@ -20,7 +20,7 @@ export default class Api {
   }
 
   addCard(data) {
-    return fetch(`${this._url}/cards`, {
+    return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
@@ -32,7 +32,7 @@ export default class Api {
   }
 
   deleteCard(cardID) {
-    return fetch(`${this._url}/cards/${cardID}`, {
+    return fetch(`${this._baseUrl}/cards/${cardID}`, {
       method: 'DELETE',
       headers: this._headers
     })
@@ -40,7 +40,7 @@ export default class Api {
   }
 
   getUserInfo() {
-    return fetch(`${this._url}/users/me`, {
+    return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
       headers: this._headers
     })
@@ -48,30 +48,30 @@ export default class Api {
   }
 
   editUserInfo(userData) {
-    return fetch(`${this._url}/users/me`, {
+    return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
         name: userData.userName,
-        about: userData.userJob
+        about: userData.userJob,
       }),
     })
       .then(this._checkResponse);
   }
 
-  editUserAvatar(avatarData) {
-    return fetch(`${this._url}/users/me/avatar`, {
+  editUserAvatar(link) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        avatar: avatarData.avatarLink
+        avatar: link,
       }),
     })
       .then(this._checkResponse);
   }
 
   putLike(cardID) {
-    return fetch(`${this._url}/cards/${cardID}/likes`, {
+    return fetch(`${this._baseUrl}/cards/${cardID}/likes`, {
       method: 'PUT',
       headers: this._headers
     })
@@ -79,7 +79,7 @@ export default class Api {
   }
 
   deleteLike(cardID) {
-    return fetch(`${this._url}/cards/${cardID}/likes`, {
+    return fetch(`${this._baseUrl}/cards/${cardID}/likes`, {
       method: 'DELETE',
       headers: this._headers
     })

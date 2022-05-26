@@ -15,7 +15,10 @@ import {
   userData,
 } from '../utils/constants.js';
 
-import { enableValidation, formValidators } from "../utils/formValidators.js";
+import {
+  enableValidation,
+  formValidators
+} from "../utils/formValidators.js";
 
 import Card from '../components/Card.js';
 import Section from '../components/Section.js';
